@@ -1,0 +1,36 @@
+<?php
+
+class Zend_View_Helper_Convertcharset extends Zend_View_Helper_Abstract
+{
+    
+    public function convertcharset($toclean)
+    {
+        $toclean = ereg_replace ( "Ã«", "e", $toclean );
+		$toclean = ereg_replace ( "ë", "e", $toclean );
+		$toclean = ereg_replace ( "é", "e", $toclean );
+		$toclean = ereg_replace ( "Ë", "E", $toclean );		
+		$toclean = ereg_replace ( "\+", "-", $toclean );		
+		$toclean = ereg_replace ( "Ã§", "c", $toclean );
+		$toclean = ereg_replace ( "\"", "", $toclean );
+		$toclean = ereg_replace ( "\?", "", $toclean );
+		$toclean = ereg_replace ( ",", "", $toclean );
+		$toclean = ereg_replace ( ":", "", $toclean );
+		$toclean = ereg_replace ( "“", "", $toclean );
+		$toclean = ereg_replace ( "”", "", $toclean );
+		$toclean = ereg_replace ( "\’", "", $toclean );
+		$toclean = ereg_replace ( "\‘", "\'", $toclean );
+		$toclean = ereg_replace ( "Ç", "C", $toclean );
+		$toclean = ereg_replace ( "ç", "c", $toclean );
+		$toclean = ereg_replace ( "–", "-", $toclean );
+		$toclean = ereg_replace ( "…", "  ", $toclean );
+		$toclean = ereg_replace ( "Ö", "O", $toclean );
+		$toclean = ereg_replace ( "ü", "u", $toclean );
+		$toclean = ereg_replace ( "á", "a", $toclean );
+		$toclean = ereg_replace ( "%", "", $toclean );
+		$toclean = ereg_replace ( "'", "", $toclean );
+		$toclean = ereg_replace ( "&nbsp;", "", $toclean );
+		return $toclean= trim($toclean);
+    	//return iconv("UTF-8","ISO-8859-1//IGNORE",$text);
+    }
+    
+}

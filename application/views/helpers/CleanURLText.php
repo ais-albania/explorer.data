@@ -1,0 +1,39 @@
+<?php
+
+class Zend_View_Helper_CleanURLText extends Zend_View_Helper_Abstract
+{
+    public function cleanURLText($toclean,$clsspace=1) {
+		if ($clsspace==1){
+			$toclean = ereg_replace (" ", "-", $toclean );
+		}
+		$toclean = ereg_replace ( "Ã«", "e", $toclean );
+		$toclean = ereg_replace ( "ë", "e", $toclean );
+		$toclean = ereg_replace ( "é", "e", $toclean );
+		$toclean = ereg_replace ( "Ë", "E", $toclean );		
+		$toclean = ereg_replace ( "\+", "-", $toclean );		
+		$toclean = ereg_replace ( "Ã§", "c", $toclean );
+		$toclean = ereg_replace ( "\"", "", $toclean );
+		$toclean = ereg_replace ( "\?", "", $toclean );
+		$toclean = ereg_replace ( ",", "", $toclean );
+		$toclean = ereg_replace ( ":", "", $toclean );
+		$toclean = ereg_replace ( "“", "", $toclean );
+		$toclean = ereg_replace ( "”", "", $toclean );
+		$toclean = ereg_replace ( "\’", "", $toclean );
+		$toclean = ereg_replace ( "\‘", "\'", $toclean );
+		$toclean = ereg_replace ( "Ç", "C", $toclean );
+		$toclean = ereg_replace ( "ç", "c", $toclean );
+		$toclean = ereg_replace ( "–", "-", $toclean );
+		$toclean = ereg_replace ( "…", "  ", $toclean );
+		$toclean = ereg_replace ( "Ö", "O", $toclean );
+		$toclean = ereg_replace ( "ü", "u", $toclean );
+		$toclean = ereg_replace ( "á", "a", $toclean );
+		$toclean = ereg_replace ( "%", "", $toclean );
+		$toclean = ereg_replace ( "'", "", $toclean );
+		$toclean = ereg_replace ( "&nbsp;", "", $toclean );
+		$toclean = ereg_replace ( "€", "Euro", $toclean );
+		$toclean = ereg_replace ( "è", "&euml;", $toclean );
+		$toclean= trim($toclean);		
+		return $toclean;
+	}
+    
+}

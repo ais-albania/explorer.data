@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Knowledge Explorer</title>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8" />
+
+<meta name="googlebot" content="noarchive" />
+<link href="/css/screen.css" media="screen" rel="stylesheet" type="text/css" /><script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script type="text/javascript" src="/browser/jquery.cookie.js"></script>
+<script type="text/javascript">
+    //<![CDATA[
+$(document).ready(function() {
+    $('.target').live("change",function() {
+    	var topic = $("#topics").val();
+        $.ajax({
+          url: "/browser/indikatore.php?indicator="+topic,
+          success: function(data) {
+	    $("#codediv").html();
+            $("#indikatore").html(data);
+          }
+        });
+    });
+
+  $('.indikatoret').live("change",function() {
+    	var indikator = $("#indikatoret").val();
+        $.ajax({
+          url: "/browser/years.php?indikatore="+indikator,
+          success: function(data) {
+          $.cookie("indikator", indikator);
+          $("#year").html(data);
+          }
+        });
+    });
+      $('.years').live("change",function() {
+    	var indikator = $("#codediv").val();
+        $.ajax({
+          url: "/browser/code.php?years="+indikator,
+          success: function(data) {
+          $("#codediv").html(data);
+          }
+        });
+    });
+    
+	$("#graph").live("click",function () { 
+	if ($.cookie("indikator")=="AkredituarIAL"){
+          window.open("/browser/graph.php");
+     }else{
+     	 window.open("/browser/lejendertimi.php");
+     }
+	  });
+
+});
+    //]]>
+</script>
+
+</head>
+
+<body>
+
+<!-- wrap starts here -->
+<div id="wrap">
+
+	<!--header -->
+	<div id="header">			
+				
+		<h1 id="logo-text"><a href="index.html" title="">Knowledge Explorer @Open Data Albania</a></h1>		
+		<p id="slogan">Promoting Data through Transparency... </p>	
+	<!--header ends-->					
+	</div>	
+	
+	
+	<!-- content -->
+	<div id="content-outer" class="clear"><div id="content-wrap">
+	
+		<div id="content">
+		
+
+<div id="right"><div id="codediv"></div></div>
+	
+<div id="left">
+	<div style="height: 500px">
+
+	<div id="query"> Topics: 
+		<select name="topics" class="target" id="topics">
+					<option value="Construction">Construction</option>
+								<option value="ElectricEnergy">ElectricEnergy</option>
+								<option value="Banks">Banks</option>
+								<option value="Poverty">Poverty</option>
+								<option value="Justice">Justice</option>
+
+								<option value="BalkansRegion">BalkansRegion</option>
+								<option value="SocialDevelopment">SocialDevelopment</option>
+								<option value="Demography">Demography</option>
+								<option value="PublicHealth">PublicHealth</option>
+								<option value="SocialInclusion">SocialInclusion</option>
+								<option value="ScienceTechnology">ScienceTechnology</option>
+
+								<option value="Agriculture">Agriculture</option>
+								<option value="Tourism">Tourism</option>
+								<option value="Employment">Employment</option>
+								<option value="Economy">Economy</option>
+								<option value="Education">Education</option>
+								<option value="Politics">Politics</option>
+
+							</select>
+	</div>
+	<div id="indikatore"></div>
+	<div id="year"></div>
+	</div>
+</div>		
+		
+		</div>	
+			
+	<!-- content end -->	
+	</div></div>
+
+		
+	<!-- footer starts here -->	
+	
+	
+	<!-- footer-bottom starts -->		
+	<div id="footer-bottom">
+		<div class="bottom-left">
+			<p>
+			&copy; 2011 <strong>Open Data Albania</strong>&nbsp; &nbsp; &nbsp;
+			<a href="http://www.shqiperia.com/" title="Shqiperia">shqiperia</a> 
+
+			</p>
+		</div>
+	
+		<div class="bottom-right">
+			<p>		
+				<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | 
+		   	<a href="http://validator.w3.org/check/referer">XHTML</a>	|			
+				<a href="index.html">Home</a> |
+				<a href="index.html">Sitemap</a> |
+				<a href="index.html">RSS Feed</a>								
+			</p>
+
+		</div>
+	<!-- footer-bottom ends -->		
+	</div>
+	
+<!-- wrap ends here -->
+</div>
+
+</body>
+</html>
+        

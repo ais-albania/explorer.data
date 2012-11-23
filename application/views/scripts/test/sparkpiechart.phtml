@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Spark pie chart example</title>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+		<script type="text/javascript" src="http://rdf-spark.googlecode.com/svn/trunk/lib/jquery.jqplot.js"></script>
+		<script type="text/javascript" src="http://rdf-spark.googlecode.com/svn/trunk/lib/jqplot.pieRenderer.js"></script>
+
+		<script type="text/javascript" src="http://km.aifb.kit.edu/sites/spark/src/jquery.spark.js"></script>
+		<link rel="stylesheet" href="/css/screen_spark.css" type="text/css" media="screen, projection">
+		<link rel="stylesheet" href="/css/print.css" type="text/css" media="print">
+		<link rel="stylesheet" href="/css/jquery.jqplot.min.css" type="text/css">
+	</head>
+	<body>
+		<div class="container">
+			<div class="span-24 last prepend-top">
+
+				<h1>Spark pie chart example</h1>
+				<p>
+					This spark goes to DBpedia, asking for the population of
+					the former Yugoslav countries.
+					<div class="spark"
+						data-spark-endpoint="http://qcrumb.com/sparql"
+						data-spark-format="/js/jquery.spark.piechart.js"
+						data-spark-query="
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                    PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+                    PREFIX  oda:  <http://open.data.al/oda.owl#>
+                    PREFIX  sdmx-measure:  <http://purl.org/linked-data/sdmx/2009/measure#> 
+                    SELECT  ?x ?product ?Vlera
+                    FROM <http://open.data.al/semanticfiles/xml/LifeInsurancePrimByCategory.xml>
+                    WHERE {
+                      ?x rdf:type oda:DataEntry .
+                      ?x oda:year ?year .
+                      ?x oda:indicator ?indicator .                      
+                      ?x oda:country ?country .
+                      ?x oda:product ?product .                                          
+                      ?x sdmx-measure:obsValue ?Vlera.
+                      ?x oda:indicator <http://open.data.al/oda.owl#LifeInsurancePrimByCategory>
+                    }
+                    ORDER BY ?product ?year ?country
+
+
+
+
+
+"
+					>
+						<em>loading&hellip;</em>
+					</div>
+				</p>
+				<p>
+
+					<a href="http://explorer.data.al">Shko tek Kreu i Eksploruesit</a>
+				</p>
+			</div>
+		</div>
+	</body>
+</html>

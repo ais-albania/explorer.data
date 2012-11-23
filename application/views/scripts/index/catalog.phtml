@@ -1,0 +1,46 @@
+<?php 
+$this->headTitle("Catalog - Open Data Albania");
+$this->headMeta ( "Open Data Albania Catalog displayes a list all datasets containing data represented in excel or semantic web formats", "description" );
+$this->headMeta ( 'katalogu open data, open data albania, socio economic data albania, statistical data albania, knowlege explorer open data albania, eksplorues njohurish open data, web sematik, te dhena semantike, te dhena statistikore ', "keywords" );
+
+$this->headLink ()->appendStylesheet ( '/css/paginator.css' );
+?>
+<div id="kata_new" style="margin: 0 auto 0 auto; width:700px; font:12px Arial; color:#666;padding-top:15px;">
+<b style="font:16px Arial; color:#0788C3;padding-top:15px;">KATALOGU OPEN DATA</b> <br /> <br />
+Katalogu Open Data është një open registry të dhënash dhe përmbajtje në një paketë. Mundëson aksesimin dhe ripërdorimin e paketave të të dhënave. <br /><br />
+
+<?php 
+
+foreach ($this->paginator as $article):
+	echo ' <div id="afishimi" style=" width:350px; height:160px; overflow:hidden;margin-top:5px;margin-bottom:5px; float:left;">';
+	echo '<div class="but" style=" margin-bottom:10px;">';
+	//ikona per download skedari excel per nje indikator te dhene
+	$xlsfile = '/var/www/vhosts/data.al/subdomains/open/httpdocs/semanticfiles/excel/'.$article["inds"].'.xls';
+	if (file_exists($xlsfile)) {
+	    echo '<a href ="http://open.data.al/semanticfiles/excel/'.$article["inds"].'.xls" target="_blank"><img src="/browser/xls_icon.gif" width="24" height="32" id="xls_button" alt="View excel file"></a>';
+	} 	
+	//n3 file button
+	$n3file = '/var/www/vhosts/data.al/subdomains/open/httpdocs/semanticfiles/rdf/'.$article["inds"].'.n3';
+	if (file_exists($n3file)) {
+	    echo '<a href ="http://open.data.al/semanticfiles/rdf/'.$article["inds"].'.n3" target="_blank"><img src="/browser/RDF_icon_96.gif" width="24" height="32" id="n3_button" alt="View rdf file (N3 triples)"></a>';
+	} 	
+	//xml file button
+	$xmlfile = '/var/www/vhosts/data.al/subdomains/open/httpdocs/semanticfiles/xml/'.$article["inds"].'.xml';
+	if (file_exists($xmlfile)) {
+	    echo '<a href ="http://open.data.al/semanticfiles/xml/'.$article["inds"].'.xml" target="_blank"><img src="/browser/xml_icon.png" width="28" height="32" id="xml_button" alt="View XML file"></a>';
+	}
+	echo ' </div>';
+	echo '<div class="clear"></div>';
+
+	echo '<a href="#" style="">'.$this->convertcharset($article["metadt"][0]).'</a><br />';
+	echo 'Publikuesi: '.$this->convertcharset($article["metadt"][1]).'<br />';
+	echo 'Krijuesi: '.$this->convertcharset($article["metadt"][2]).'<br />';
+	echo 'Date krijimi: '.$article["metadt"][3].'<br />';
+	echo '</div> ';	
+endforeach;
+?>
+</div>
+<!--  paginator ketu -->
+<div class="clear"></div>
+<div style=" width:370px;margin: 0 auto 0 auto;"><?=$this->paginationControl ( $this->paginator, 'Sliding', 'pagination.phtml' );?></div>
+<div class="clear"></div>

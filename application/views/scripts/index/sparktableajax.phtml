@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Knowledge Explorer - Spark Result</title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>
+<script type="text/javascript" src="/js/jquery.spark.js"></script>
+		<link rel="stylesheet" href="/css/screen_spark.css" type="text/css" media="screen, projection">
+		<link rel="stylesheet" href="/css/print.css" type="text/css" media="print">
+		<link href="/css/screen.css" media="screen" rel="stylesheet" type="text/css" />
+	</head>
+	<body>
+	
+		<!--header -->
+	<div id="header">					
+		<h1 id="logo-text"><a href="/" title="">Knowledge Explorer @Open Data Albania</a></h1>		
+		<p id="slogan">Promoting Data through Transparency... </p>						
+	</div>	
+
+		<div class="container">
+			<div class="span-24 last prepend-top">
+				<h2>Rezultatet e k&euml;rkimit sipas Spark</h2>
+				<p>
+M&euml; posht&euml; paraqiten rezultatet e k&euml;rkimit n&euml; form&euml; tabelare t&euml; marr&euml; me Spark p&euml;r indikatorin <b><?=$this->indicator;?></b>. 
+					<div class="spark"
+						data-spark-endpoint="http://qcrumb.com/sparql"
+						data-spark-format="/js/jquery.spark.simpletable.js"
+						data-spark-query="<?=$this->query;?>"
+					>
+                    <em >loading&hellip;</em>
+					</div>
+				</p>
+				<p>
+					<a href="index.html">[back to gallery]</a>
+				</p>
+			</div>
+		</div>
+	<!-- footer-bottom starts -->		
+	<div id="footer-bottom">
+		<div class="bottom-left">
+			<p>
+			&copy; 2011 <strong>Open Data Albania</strong>&nbsp; &nbsp; &nbsp;
+			<a href="http://www.shqiperia.com/" title="Shqiperia">shqiperia</a>
+
+			</p>
+		</div>	
+		
+		<div class="bottom-right">
+			<p>		
+				<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a> | 
+		   	    <a href="http://validator.w3.org/check/referer">XHTML</a>	|			
+				<a href="/">Home</a> |
+				<a href="/">Sitemap</a> |
+				<a href="/">RSS Feed</a>								
+			</p>
+		</div>
+	<!-- footer-bottom ends -->		
+	</div>
+	</body>
+</html>

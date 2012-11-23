@@ -1,0 +1,78 @@
+<script src="http://js.nicedit.com/nicEdit-latest.js" type="text/javascript"></script>
+<script type="text/javascript">bkLib.onDomLoaded(nicEditors.allTextAreas);</script>
+<?=$this->headTitle($this->metadata[0])?>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">   
+      google.load('visualization', '1', {'packages':['motionchart']});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string','indicator');
+		data.addColumn('number','viti');
+		data.addColumn('number','value');
+        <?php
+		foreach (unserialize($this->data) as $vlerarows){
+			//nese ka produkt, emri i produktit do te jete parametri i pare i MotionChart
+			if ($this->withProduct == true)
+              $addRow[]=$vlerarows["product"];
+            //perndryshe do te jete shteti  
+            else   
+              $addRow[]=$vlerarows["country"];
+            //parametri horizontal do jete gjithnje viti
+            //parametri vertikal do jete gjithnje vlera  
+            $addRow[]=(int)$vlerarows["viti"];
+            $addRow[]=(double)$vlerarows["value"];
+			$addRows[]=$addRow;
+			unset($addRow);
+		}
+		
+		$text=json_encode($addRows);
+		
+        ?>
+        data.addRows(<?=$text?>);
+        var chart = new google.visualization.MotionChart(document.getElementById('chart_div'));
+        var options = {};
+        options['state'] ='{"yAxisOption":"2","dimensions":{"iconDimensions":["dim0"]},"yZoomedDataMax":240,"orderedByX":false,"showTrails":false,"playDuration":15000,"time":"2009","yZoomedDataMin":-1,"xZoomedIn":false,"yZoomedIn":false,"sizeOption":"_UNISIZE","uniColorForNonSelected":false,"nonSelectedAlpha":0.4,"yLambda":1,"duration":{"multiplier":1,"timeUnit":"Y"},"xZoomedDataMin":504921600000,"iconType":"BUBBLE","orderedByY":false,"colorOption":"2","xZoomedDataMax":1230768000000,"iconKeySettings":[],"xLambda":1,"xAxisOption":"_TIME"}';
+        options['width'] =670;
+        chart.draw(data, options);
+      }	   
+</script>
+<!-- fillim grafiku -->
+<?=$this->metadata[0]?>
+<div id="chart_div" style="width: 700px; height: 400px;"></div>
+<div class="clear"></div>
+<!-- fund grafiku -->
+
+<form action="/browser/addform.php" id="searchForm">
+   <input name="title" value="Titulli: <?=$this->metadata[0]?>" cols="50" style="width: 70%;"/>
+   <textarea name="comment" cols="55" style="width: 70%;height: 150px;">
+	</textarea><br />
+	<input name="burimi" value="Burimi <?=$this->metadata[1]?>" readonly="readonly" style="width: 70%;"/>
+   	<input name="emri" value="Emri juaj" style="width: 70%;"/>
+   <input type="submit" value="Shto Artikull" />
+</form>
+  <!-- the result of the search will be rendered inside this div -->
+  <div id="result"></div>
+<script>
+  /* attach a submit handler to the form */
+  $("#searchForm").submit(function(event) {
+    /* stop form from submitting normally */
+    event.preventDefault();
+
+    /* get some values from elements on the page: */
+    var $form = $( this ),
+        term = $form.find( 'input[name="comment"]' ).val(),
+        url = $form.attr( 'action' );
+
+    /* Send the data using post and put the results in a div */
+    $.post( url, { s: term },
+      function( data ) {
+
+          $( "#result" ).empty().append( "Emaili u dergua" );
+          $("#searchForm").hide();
+      }
+    );
+  });
+</script>
+
+

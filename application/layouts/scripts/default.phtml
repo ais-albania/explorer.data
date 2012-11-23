@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=iso-8859-1" />
+<meta name="googlebot" content="noarchive" />
+<META NAME="ROBOTS" CONTENT="ALL"> 
+<?php
+echo $this->headTitle () . "\n\r";
+echo $this->headMeta () . "\n\r";
+echo $this->headLink () . "\n\r";
+echo $this->headStyle (). "\n\r";
+echo $this->headScript (). "\n\r";
+?>
+<link href="/css/screen.css" media="screen" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script type="text/javascript" src="/browser/jquery.cookie.js"></script>
+<!-- spark script -->
+<link rel="stylesheet" href="/css/screen_spark.css" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="/css/print.css" type="text/css" media="print">		
+<script type="text/javascript" src="/js/jquery-latest.js"></script>	
+<link rel="icon" type="/images/ico" href="/images/favicon.ico " />	
+</head>
+<body>
+<!-- wrap starts here -->
+<div id="wrap">
+	<?= $this->render("header.phtml"); ?>
+	<!-- content -->
+	<div id="content-outer" class="clear">
+	<div id="content-wrap">
+	<?= $this->layout()->content;?>
+	<!-- content end -->
+	</div>
+	</div>
+	<!-- footer starts here -->
+	<?= $this->render("footer.phtml"); ?>
+<!-- wrap ends here -->
+</div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  p { color:red; margin:4px; }
+  b { color:blue; }
+  </style>
+  <script src="/js/jquery-latest.js"></script>
+</head>
+<body>
+  <p></p>
+
+  <select id="multiple" multiple="multiple">
+    <option >Multiple1</option>
+    <option>Multiple2</option>
+
+    <option >Multiple3</option>
+  </select>
+<script>
+    function displayVals() {
+      
+      var multipleValues = $("#multiple").val() || [];      
+      multipleValues = multipleValues.join(",")
+      alert (multipleValues) ;
+      //$("p").html(multipleValues.join(", "));
+    }
+
+    $("select").change(displayVals);
+    displayVals();
+
+</script>
+
+</body>
+</html>

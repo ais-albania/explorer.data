@@ -1,0 +1,107 @@
+<?php
+$this->headTitle("Knowledge Explorer - Open Data Albania");
+$this->headMeta ( "A system that enables users to retrieve socio-economic statistical data represented and displayed based on sematic web technologies. ", "description" );
+$this->headMeta ( 'open data albania, socio economic data albania, statistical data albania, knowlege explorer open data albania, eksplorues njohurish open data, web sematik, te dhena semantike, te dhena statistikore ', "keywords" );
+?>
+<script type="text/javascript">
+
+$(document).ready(function() {
+	var indicator="";
+	//indikatoret per nje topic te dhene
+    $('.target').live("change",function() {
+
+    	var topic = $("#topics").val();
+    	$("#indikatore").empty().html('<img src="/images/spinner.gif" />');
+
+        $.ajax({
+          url: "http://explorer.data.al/index/indicator/topic/"+topic,
+          success: function(data) {
+	        $("#codediv").html();
+            $("#indikatore").html(data);
+
+          }
+        });
+    });
+    //vitet per nje indikator te dhene
+    $('.indikatoret').live("change",function() {
+    	var indikator = $("#indikatoret").val();
+    	indicator = indikator;
+    	$("#year").empty().html('<img src="/images/spinner.gif" />');
+        $.ajax({
+          url: "http://explorer.data.al/index/years/indicator/"+indikator,
+          success: function(data) {
+          $("#year").html(data);
+          }
+        });
+    });
+
+    $('.years').live("change",function() {    	
+    	var vitet = $("#years").val() || []; 
+    	
+    	$("#codediv").empty().html('<img src="/images/spinner.gif" />');
+        $.ajax({
+          url: "http://explorer.data.al/index/retrievedataajax/indicator/"+indicator+"/years/"+vitet,
+          success: function(data) {
+          $("#codediv").html(data);
+          }
+        });
+    });
+    //shfaq grafik
+	$("#graph").live("click",function () {
+		  var vitet = $("#years").val() || [];		  
+          window.open("http://explorer.data.al/index/retrievedata/indicator/"+indicator+"/years/"+ vitet );
+	  });
+	$("#rdf").live("click",function () {
+        window.open("http://open.data.al/semanticfiles/xml/"+indicator+".xml");
+	  });
+	$("#sparktable").live("click",function () {
+		window.open("http://explorer.data.al/index/sparktableajax/indicator/"+indicator);
+	  });
+    //download xls file per nje indikator te dhene
+	$("#xls_button").live("click",function () {
+		window.open("http://open.data.al/semanticfiles/excel/"+indicator+".xls");
+	});
+    //n3 file per nje indikator te dhene
+	$("#n3_button").live("click",function () {
+		window.open("http://open.data.al/semanticfiles/rdf/"+indicator+".n3");
+	});
+    //xml file per nje indikator te dhene
+	$("#xml_button").live("click",function () {
+		window.open("http://open.data.al/semanticfiles/xml/"+indicator+".xml");
+	});
+
+
+});
+</script>
+<div id="loader"></div>
+
+<div id="content">
+    <!-- pjesa  djathtas ketu-->
+	<div id="right">
+		<div style="width: 690px;padding:7px; float:left;" id="codediv"> <!-- afishim kodi ketu--></div>
+		<div  id="chart_div"></div>
+	</div>
+	<!-- fund pjesa  djathtas-->
+	
+	<!-- pjesa  majtas ketu-->
+	<div id="left">
+	  <div style="height: 300px;background-image: -ms-radial-gradient(center, circle cover, #FFFFFF 0%, #E0E0E0 100%);background-image: -moz-radial-gradient(center, circle cover, #FFFFFF 0%, #E0E0E0 100%);background-image: -o-radial-gradient(center, circle cover, #FFFFFF 0%, #E0E0E0 100%);background-image: -webkit-gradient(radial, center center, 0, center center, 437, color-stop(0, #FFFFFF), color-stop(1, #E0E0E0));background-image: -webkit-radial-gradient(center, circle cover, #FFFFFF 0%, #E0E0E0 100%);background-image: radial-gradient(center, circle cover, #FFFFFF 0%, #E0E0E0 100%);filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#E0E0E0', endColorstr='#ffffff');">	 
+		<div style=" font-family:Arial;color:#0788C3;font-size:13px;padding:6px;" id="query"> Topics:
+			<select name="topics" class="target" id="topics">
+			<option value="">Zgjidh temë</option>
+			<?php foreach ($this->topics as $tema):?>
+				<option value="<?=$tema?>"><?=$tema?></option>
+			<?php endforeach ?>
+			</select>
+		</div>
+		<div style=" font-family:Arial;color:#0788C3;font-size:12px;padding:6px;" id="indikatore"></div>
+		<div style=" font-family:Arial;color:#0788C3;font-size:12px;padding:6px; float:left" id="year"></div>
+		<div id="country"></div>
+		</div><!-- fund pjesa  majtas-->
+		<div style="margin-top:35px;height:360px;" id="katalogu"><a href = "/index/catalog/" target="_blank">Shko te katalogu i te dhenave</a>
+		<a href="http://explorer.data.al/index/catalog/" target="_new"> <img style=" margin-top:15px; text-decoration:none;" src="/images/first.jpg" width="277" height="130" /></a>
+		</div>
+	  </div>
+	
+	
+</div>

@@ -1,0 +1,28 @@
+<?php if ($this->pageCount): ?> 
+<div class="pagination">
+<ul>
+<!-- Previous page link --> 
+<?php if (isset($this->previous)): ?> 
+  <li><a href="<?= $this->url(array('faqe' => $this->previous)); ?>">&lt; M&euml; para</a></li>
+<?php else: ?> 
+  <li class="disablepage">&lt; M&euml; para</li> 
+<?php endif; ?> 
+
+<!-- Numbered page links -->
+<?php foreach ($this->pagesInRange as $page): ?> 
+  <?php if ($page != $this->current): ?>
+    <li ><a href="<?= $this->url(array('faqe' => $page)); ?>"><?= $page; ?></a></li>
+  <?php else: ?>
+    <li class="currentpage"><?= $page; ?></li>
+  <?php endif; ?>
+<?php endforeach; ?>
+
+<!-- Next page link --> 
+<?php if (isset($this->next)): ?> 
+   <li><a href="<?= $this->url(array('faqe' => $this->next)); ?>">M&euml; pas &gt;</a></li>
+<?php else: ?> 
+  <li class="nextpage">M&euml; pas &gt;</li>
+<?php endif; ?> 
+</ul>
+</div> 
+<?php endif; ?>

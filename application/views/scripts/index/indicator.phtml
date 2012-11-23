@@ -1,0 +1,17 @@
+<!-- gjithe indikatoret per nje topic te dhene -->
+Indicators: 
+<?php 
+if (count ($this->indicator)>0){ ?>
+	<select name="indikatoret" id="indikatoret" class="indikatoret">
+	<option value="">Zgjidh indikator</option>
+	<?php
+		foreach ($this->indicator as $element):?>
+			<option value="<?=$element?>"><?=$element?></option><?php	
+		endforeach; ?>	
+	</select>
+<?php 
+}
+else {
+	if ($this->topic != "")
+	  echo "Nuk ka ende indikatore per kete topic! Kerkoni per nje teme tjeter! ";
+}

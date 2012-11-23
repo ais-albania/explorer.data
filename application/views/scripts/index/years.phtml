@@ -1,0 +1,46 @@
+<!-- fillim butona -->
+<h3 style=" font-size:12px; font-family:Arial;color:#0788C3; width:266px; margin-top:5px; letter-spacing:normal">Shkaroni te dhenat ne formatin tuaj te deshiruar</h3>
+<div id="butona" style=" float:left; width:230px; margin: 0 auto 0 auto;">
+<?php
+//ikona per download skedari excel per nje indikator te dhene
+$xlsfile = '/var/www/vhosts/data.al/subdomains/open/httpdocs/semanticfiles/excel/'.$this->indicator.'.xls';
+if (file_exists($xlsfile)) {
+    echo '<img src="/browser/xls_icon.gif" width="24" height="32" id="xls_button" alt="View excel file">';
+} 
+
+//n3 file button
+$n3file = '/var/www/vhosts/data.al/subdomains/open/httpdocs/semanticfiles/rdf/'.$this->indicator.'.n3';
+if (file_exists($n3file)) {
+    echo '<img src="/browser/RDF_icon_96.gif" width="24" height="32" id="n3_button" alt="View rdf file (N3 triples)">';
+} 
+
+//xml file button
+$xmlfile = '/var/www/vhosts/data.al/subdomains/open/httpdocs/semanticfiles/xml/'.$this->indicator.'.xml';
+if (file_exists($xmlfile)) {
+    echo '<img src="/browser/xml_icon.png" width="28" height="32" id="xml_button" alt="View XML file">';
+}
+
+?></div>
+<!-- fund butona -->
+<div class="clear"></div>
+<div style=" float:left; width:280px;" id="new_year">
+Years: 
+<?php 
+if (count ($this->years)>0){ ?>
+	<select  style="padding-top:15px;"name="years" id="years" class="years" multiple="multiple" size="5"><?php
+		foreach ($this->years as $element):
+			?><option value="<?=$element?>"><?=$element?></option><?php
+		endforeach; 
+		?>
+	</select><?php
+
+
+}
+else {
+	echo 'Nuk ka ende te dhena per kete indikator! Kerkoni per nje indikator tjeter!';
+}?>	
+<script >
+   var indicator = <?=$this->indicator?>;
+</script>
+</div>
+<div class="clear"></div>
